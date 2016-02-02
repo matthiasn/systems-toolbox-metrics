@@ -25,8 +25,8 @@
      :start-time      (.getStartTime rt-mx-bean)}))
 
 (defn send-stats
-  [{:keys [put-fn]}]
-  (put-fn [:stats/jvm (system-utilization)]))
+  [{:keys [put-fn msg-meta]}]
+  (put-fn (with-meta [:stats/jvm (system-utilization)] msg-meta)))
 
 (defn cmp-map
   {:added "0.3.1"}
