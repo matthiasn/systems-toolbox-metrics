@@ -2,6 +2,7 @@
   (:require-macros [cljs.core.async.macros :refer [go-loop]])
   (:require [reagent.core :as r :refer [atom]]
             [cljs.core.match :refer-macros [match]]
+            [matthiasn.systems-toolbox-metrics.spec]
             [matthiasn.systems-toolbox-ui.helpers :refer [by-id]]
             [goog.string :as gstring]
             [goog.string.format]))

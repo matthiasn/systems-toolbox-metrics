@@ -1,5 +1,6 @@
 (ns matthiasn.systems-toolbox-metrics.metrics
   (:gen-class)
+  (:require [matthiasn.systems-toolbox-metrics.spec])
   (:import [java.lang.management ManagementFactory
                                  OperatingSystemMXBean
                                  MemoryMXBean
