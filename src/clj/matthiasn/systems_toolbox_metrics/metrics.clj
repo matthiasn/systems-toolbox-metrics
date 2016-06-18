@@ -26,7 +26,7 @@
 
 (defn send-stats
   [{:keys [put-fn msg-meta]}]
-  (put-fn (with-meta [:stats/jvm (system-utilization)] msg-meta)))
+  (put-fn (with-meta [:stats/jvm (system-utilization)] (merge msg-meta {:sente-uid :broadcast}))))
 
 (defn cmp-map
   {:added "0.3.1"}
