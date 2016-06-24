@@ -76,8 +76,8 @@
 
 (defn cmp-map
   {:added "0.3.1"}
-  [cmp-id dom-id]
-  {:cmp-id           cmp-id
-   :state-fn (mk-state dom-id)
+  [cmp-id cfg]
+  {:cmp-id      cmp-id
+   :state-fn    (mk-state (:dom-id cfg))
    :handler-map {:stats/jvm recv-jvm-stats}
-   :opts             {:reload-cmp false}})
+   :opts        (merge cfg {:reload-cmp false})})
