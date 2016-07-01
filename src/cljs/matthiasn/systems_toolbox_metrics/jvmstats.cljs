@@ -80,4 +80,4 @@
   {:cmp-id      cmp-id
    :state-fn    (mk-state (:dom-id cfg))
    :handler-map {:stats/jvm recv-jvm-stats}
-   :opts        (merge cfg {:reload-cmp false})})
+   :opts        cfg})
