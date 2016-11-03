@@ -37,7 +37,7 @@
         s 1000 m (* 60 s) h (* 60 m) ; time units for uptime calculation
         uptime-str (when-let [upt (:uptime latest)]
                      (str (floor (/ upt h)) "h" (floor (/ (rem upt h) m)) "m"))
-        gc-percentage (when latest (str " time " (.toFixed (* (/ (:gc-time latest) (:uptime latest)) 100) 2) "%"))
+        gc-percentage (when latest (str " - time " (.toFixed (* (/ (:gc-time latest) (:uptime latest)) 100) 2) "%"))
         w 3 gap 1 sparkline-h 16 ; bar width, height, and gap between bars
         chart-w 300 chart-h 44]  ; chart dimensions
     [:div
@@ -56,10 +56,10 @@
           (/ v available-cpus)])
        [:text (merge text-bold {:y 35 :x 10}) "CPUs:"]
        [:text (merge text-default {:y 35 :x 42}) available-cpus]
-       [:text (merge text-bold {:y 35 :x 54}) "Uptime:"]
-       [:text (merge text-default {:y 35 :x 94}) uptime-str]
-       [:text (merge text-bold {:y 35 :x 150}) "GC:"]
-       [:text (merge text-default {:y 35 :x 172}) (str "count " (:gc-count latest) gc-percentage)]]]]))
+       [:text (merge text-bold {:y 35 :x 60}) "Uptime:"]
+       [:text (merge text-default {:y 35 :x 100}) uptime-str]
+       [:text (merge text-bold {:y 35 :x 160}) "GC:"]
+       [:text (merge text-default {:y 35 :x 185}) (str "count " (:gc-count latest) gc-percentage)]]]]))
 
 (defn mk-state
   "Return clean initial component state atom."

@@ -1,6 +1,7 @@
 (ns matthiasn.systems-toolbox-metrics.metrics
   (:gen-class)
-  (:require [matthiasn.systems-toolbox-metrics.spec])
+  (:require [matthiasn.systems-toolbox-metrics.spec]
+            [clojure.tools.logging :as log])
   (:import [java.lang.management ManagementFactory
                                  OperatingSystemMXBean
                                  MemoryMXBean
@@ -27,7 +28,10 @@
 
 (defn send-stats
   [{:keys [put-fn msg-meta]}]
-  (put-fn (with-meta [:stats/jvm (system-utilization)] (merge msg-meta {:sente-uid :broadcast}))))
+  (let [stats (system-utilization)]
+    (log/info stats)
+    (put-fn (with-meta [:stats/jvm stats] (merge msg-meta
+                                                 {:sente-uid :broadcast})))))
 
 (defn cmp-map
   {:added "0.3.1"}
