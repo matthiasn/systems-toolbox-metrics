@@ -37,7 +37,8 @@
         s 1000 m (* 60 s) h (* 60 m) ; time units for uptime calculation
         uptime-str (when-let [upt (:uptime latest)]
                      (str (floor (/ upt h)) "h" (floor (/ (rem upt h) m)) "m"))
-        gc-percentage (when latest (str " - time " (.toFixed (* (/ (:gc-time latest) (:uptime latest)) 100) 2) "%"))
+        percentage #(.toFixed (* (/ (:gc-time %) (:uptime %)) 100) 2)
+        gc-percentage (when latest (str " - time " (percentage latest) "%"))
         w 3 gap 1 sparkline-h 16 ; bar width, height, and gap between bars
         chart-w 300 chart-h 44]  ; chart dimensions
     [:div
@@ -71,8 +72,9 @@
 
 (defn recv-jvm-stats
   "Handle incoming JVM stats by adding those to the component state."
-  [{:keys [cmp-state msg-payload]}]
-  (swap! cmp-state assoc :readings (conj (:readings @cmp-state) msg-payload)))
+  [{:keys [current-state msg-payload]}]
+  (let [readings (conj (:readings current-state) msg-payload)]
+    {:new-state (assoc-in current-state [:readings] readings)}))
 
 (defn cmp-map
   {:added "0.3.1"}
